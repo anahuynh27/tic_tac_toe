@@ -1,0 +1,7 @@
+table {
+    display: grid;
+    justify-content: center;
+    font-size: 100px;
+    border: 1px;
+    padding: 10px
+}
