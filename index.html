@@ -10,23 +10,38 @@
     <body>
         <h1>Tic-Tac-Toe</h1>
         <p>How to play: click on a square to mark an 'X'. The computer will then generate a random 'O' after your turn.</p>
-        <table>
-            <tr>
-                <td id="a">a</td>
-                <td id="b">b</td>
-                <td id="c">c</td>
-            </tr>
-            <tr>
-                <td id="d">d</td>
-                <td id="e">e</td>
-                <td id="f">f</td>
-            </tr>
-            <tr>
-                <td id="g">g</td>
-                <td id="h">h</td>
-                <td id="i">i</td>
-            </tr>
-        </table>
+        <select>
+            <option>
+                X
+            </option>
+            <option>
+                O
+            </option>
+        </select>
+        <select>
+            <option>
+                One Player
+            </option>
+            <option>
+                Two Players
+            </option>
+        </select>
+        <div id="table" class ="table">
+                <table>
+                    <tr></tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <tr></tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <tr></tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                </table>
+        </div>
         <script src = "app.js"></script>
     </body>
 
