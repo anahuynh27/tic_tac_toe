@@ -29,17 +29,42 @@ function renderState() {
 function onBoardClick() {
   //update state, doze or so helper functions here
 
-  function addXHere(event) {
-    console.log("click");
-    let target = event.target; //either <td> or <table> depending where you click
-    if (event.target.tagName == "TABLE") {
-      target.className = null //Change .className when you figure out what you need to put in there
-      console.log("this is null")
-       } 
-  }
   
   renderState()//shouw the user the new state
 }
-const board = document.getElementById("board")
-board.addEventListener("click", onBoardClick)
+// const board = document.getElementById("board")
+// board.addEventListener("click", onBoardClick)
+
+//WRITE YOUR CODE BELOW
+function addXHere(event) {
+  let target = event.target; //either <td> or <table> depending where you click
+  console.log("click");
+  if (event.target.tagName == "TABLE") {
+    target.className = null //Change .className when you figure out what you need to put in there
+    console.log("this is null")
+     } 
+}
+table.addEventListener('click', addXHere)
+
+//MOUSEOVER && i did this on css td:hover
+let td = table.querySelectorAll("td");
+console.log(td)
+
+// table.addEventListener('mouseover', (e) => {
+//   let target = e.target
+//   console.log(target)
+//   if (target.tagName == "TD") {
+//     console.log(e.target.tagName)
+//     for (let i = 0; i < td.length; i++) {
+//       td[i].style.backgroundColor = "pink"
+//     }
+//   }
+// })
+
+//RESET BUTTON
+let reset = document.getElementById("reset");
+function resetFn() {
+  location.reload()
+}
+reset.addEventListener("click", resetFn)
 

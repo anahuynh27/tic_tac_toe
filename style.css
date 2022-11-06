@@ -1,8 +1,10 @@
 table {
     width: 100%;
-    display: table;
+    display: flex;
     padding: 50px;
     border: 5px solid black;
+    background-color: black;
+    justify-content: center;
 }
 * {
     text-align: center;
@@ -10,11 +12,25 @@ table {
 
 td {
     border: 5px solid black;
-    height: 150px;
+    height: 175px;
+    width: 175px;
+    background-color: white;
+  
+}
+td:hover {
+    background-color: lightgreen;
+    /* background-image: url("https://static.vecteezy.com/system/resources/thumbnails/009/344/496/small/x-transparent-free-png.png"); */
+    background-image: url("https://charbase.com/images/glyph/7439");
 }
 select {
     padding: 10px;
     font-size: xx-large;
     font-weight: bold;
-
+    background-color: lightgreen;
+}
+button {
+    padding: 10px;
+    font-size: xx-large;
+    font-weight: bold;
+    background-color: lightgreen;
 }
