@@ -1,19 +1,26 @@
 const gameState = {
-    players: ['x', 'o'],
-    board: [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null]
-    ]
-  }
-
+  players: ['x', 'o'],
+  board: [
+     [null, null, null],
+    [null, null, null],
+    [null, null, null]
+  ]
+}
+    
 let playerX = gameState.players[0];
-console.log(playerX)
+    console.log(playerX)
 let playerO = gameState.players[1];
-console.log(playerO)
-
+    console.log(playerO)
+    
 const table = document.getElementById("table"); //same as board?
-
+    
+//RESET BUTTON
+let reset = document.getElementById("reset");
+function resetFn() {
+  location.reload()
+}
+reset.addEventListener("click", resetFn)
+  
 
 //state
 let state; 
@@ -38,7 +45,10 @@ function onBoardClick() {
 //WRITE YOUR CODE BELOW
 function addXHere(event) {
   let target = event.target; //either <td> or <table> depending where you click
+  console.log(target)
   console.log("click");
+  target.innerHTML = playerO
+
   if (event.target.tagName == "TABLE") {
     target.className = null //Change .className when you figure out what you need to put in there
     console.log("this is null")
@@ -47,8 +57,7 @@ function addXHere(event) {
 table.addEventListener('click', addXHere)
 
 //MOUSEOVER && i did this on css td:hover
-let td = table.querySelectorAll("td");
-console.log(td)
+// let td = table.querySelectorAll("td");
 
 // table.addEventListener('mouseover', (e) => {
 //   let target = e.target
@@ -60,11 +69,4 @@ console.log(td)
 //     }
 //   }
 // })
-
-//RESET BUTTON
-let reset = document.getElementById("reset");
-function resetFn() {
-  location.reload()
-}
-reset.addEventListener("click", resetFn)
 
