@@ -20,7 +20,13 @@ function resetFn() {
   location.reload()
 }
 reset.addEventListener("click", resetFn)
-  
+
+//MORE GAMES BUTTON
+let moreGames = document.getElementById("moreGames")
+function moreGamesFn() {
+  window.open("https://playtictactoe.org/")
+}
+moreGames.addEventListener("click", moreGamesFn)
 
 //state
 let state; 
@@ -47,12 +53,13 @@ function addXHere(event) {
   let target = event.target; //either <td> or <table> depending where you click
   console.log(target)
   console.log("click");
-  target.innerHTML = playerO
-
+  
   if (event.target.tagName == "TABLE") {
     target.className = null //Change .className when you figure out what you need to put in there
     console.log("this is null")
-     } 
+  } else {
+    target.innerHTML = playerX
+     }
 }
 table.addEventListener('click', addXHere)
 
@@ -69,4 +76,8 @@ table.addEventListener('click', addXHere)
 //     }
 //   }
 // })
+
+let playerSelect = document.getElementById("playerSelect")
+
+
 
