@@ -24,19 +24,20 @@ let goButton = document.getElementById("go")
 let selectPlayerAmount = document.getElementById("playerSelect")
 let playerOne = document.getElementById("first-player")
 let playerTwo = document.getElementById("player-two")
+let nameDisplay = document.getElementById("pVp")
 //we're going to have <p id="instruction"> change .innerText with player name
-function goButtonFn(e) {
-  let target = e.target;
+function goButtonFn() {
   let oneOrTwo = selectPlayerAmount.value
-  let nameDisplay = document.getElementById("pVp")
   if (oneOrTwo == "One Player") {
     console.log("one")
     let pNameOne = prompt("Player One - Enter Name Below", "Player One")
-    nameDisplay.innerHTML(pNameOne)
+    console.log(pNameOne)
+    nameDisplay.innerText = `${pNameOne} vs. Computer`
   } else if (oneOrTwo == "Two Players") {
     console.log("two")
     let ppNameOne = prompt("Player One - Enter Name Below", "Player One")
     let ppNameTwo = prompt("Player Two - Enter Name Below", "Player Two")
+    nameDisplay.innerText = `${ppNameOne} vs. ${ppNameTwo}`
   } else {
     console.log("didn't work")
   }
