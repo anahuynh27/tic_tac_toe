@@ -16,7 +16,7 @@ td {
     width: 175px;
     background-color: white;
     font-weight: bolder;
-    font-size: 50px;
+    font-size: 100px;
 }
 td:hover {
     background-color: lightgreen;
