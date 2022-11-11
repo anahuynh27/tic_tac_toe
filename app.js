@@ -19,10 +19,13 @@ console.log(td)
 
 
 function compPlay(event) {
-let random = Math.floor(Math.random() * td.length)
-console.log(random)
-let addText = td.textContent
-addText = random
+  function computerPlay() {
+    let random = Math.floor(Math.random() * td.length)
+    console.log(random)
+    let addText = td.textContent
+    addText = random
+  }
+  table.addEventListener("click", computerPlay)
 }
 
 //******* FUNCTIONS BELOW WORKED  ************/
