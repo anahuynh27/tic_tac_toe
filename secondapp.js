@@ -10,27 +10,45 @@ const gameState = {
 let goButton = document.getElementById("go")
 const table = document.getElementById("table")
 let td = table.querySelectorAll("td")
+let tdArray = [...td]
+console.log(tdArray)
+let statusText = document.querySelector("#statusText")
+
+// gameState.board.push(tdArray)
 let random = Math.floor(Math.random() * td.length)
+// let randomStart = Math.floor(Math.random() * gameState.players.length)
+let randomStart = 0
 
-let currentPlayer = []
-
-function winningBoard() {
-  let merge = [].concat(gameState.board[0], gameState.board[1], gameState.board[2])
-  let mergeStr = merge.toString
-  let gb0 = gameState.board[0].toString
-  let gb1 = gameState.board[1].toString
-  let gb2 = gameState.board[3].toString
-  if (gb0 == "X", "X", "X") {
-    console.log("Win!")
-  } else if (gb1 == "X", "X", "X") {
-    console.log("Win!")
-  }else if (gb2 == "X", "X", "X") {
-    console.log("Win!")
+let gamerOne = gameState.players[0]
+let gamerTwo = gameState.players[1]
+let currentPlayer = gamerOne
+function turnSwap() {
+  if (randomStart == 0) {
+    playerTurn(table.target.id, currentPlayer)
+    if (currentPlayer === gamerOne) {
+      currentPlayer = gamerTwo
+    } else {
+      currentPlayer = gameOne
+    }
+    //currentPlayer = currentPlayer === gamerOne ? gamerTwo : gamerOne
   }
 }
+function playerTurn(tdArray, game) { 
+
+}
+
+
+// function togglePlayer() {
+ 
+for (let i = 0; i < tdArray.length; i++){
+    if (tdArray[i] == "X" || "O") {
+      // console.log("hellow")
+    }console.log([i])
+  }
+//}
 function addXHere(event) {
   let target = event.target; //either <td> or <table> depending where you click
-  console.log(target)
+
   console.log("click");
   if (target.tagName == "TABLE") {
     target = null 
@@ -41,12 +59,33 @@ function addXHere(event) {
   } else {
     target.innerHTML = gameState.players[0] 
   }
+  table.addEventListener("click", addOHere)
+}
+function addOHere(event) {
+  let target = event.target; //either <td> or <table> depending where you click
+  console.log(target)
+  console.log("click");
+  if (target.tagName == "TABLE") {
+    target = null
+    console.log("this is null")
+  } else if (target.tagName == "TBODY") {
+    target = null
+    console.log("this is also null")
+  }else {
+    target.innerHTML = gameState.players[1]
+  }
+  table.addEventListener("click", addXHere)
 }
 function compFirst() {
- 
+  if (randomStart === 1) {
     td[random].innerText = "O"
     table.addEventListener("click", addXHere)
- 
+    randomStart = 0
+  } else if (randomStart === 0) {
+    td[6].innerText = "O"
+    console.log(random)
+    table.addEventListener("click", addXHere)
+  } 
 }
 
 function buildInitialState() {
@@ -57,11 +96,14 @@ function buildInitialState() {
         console.log("one")
         let pNameOne = prompt("Player One - Enter Name Below", "Player One")
         nameDisplay.innerText = `${pNameOne} vs. Computer`
-        let randomStart = Math.floor(Math.random() * gameState.players.length)
-      if (randomStart == 0) {
+        // let randomStart = Math.floor(Math.random() * gameState.players.length)
+      let randomStart = 0
+      if (randomStart === 0) {
+        console.log(randomStart)
         alert(`${pNameOne} will go first`)
-        
-      } else if (randomStart == 1) {
+        compFirst()
+      } else if (randomStart === 1) {
+        console.log(randomStart)
         alert("Computer will go first")
        compFirst()
       }
@@ -71,19 +113,21 @@ function buildInitialState() {
         let ppNameOne = prompt("Player One - Enter Name Below", "Player One")
         let ppNameTwo = prompt("Player Two - Enter Name Below", "Player Two")
         nameDisplay.innerText = `${ppNameOne} vs. ${ppNameTwo}`
-        let randomStart = Math.floor(Math.random() * gameState.players.length)
+        // let randomStart = Math.floor(Math.random() * gameState.players.length)
+      let randomStart = 0
             if (randomStart == 0) {
-                alert(`${ppNameOne} will go first`)
+              alert(`${ppNameOne} will go first`)
             } else {
                  alert(`${ppNameTwo} will go first`)
-            }
+      }
     } else {
         console.log("didn't work")
         alert("Please select one or two players. Then click 'go'")
   }
-
-  
 }
+
+
+//if game is complete
 
 // render
 function renderState() {
@@ -108,20 +152,6 @@ const board = document.getElementById('board');
 // board.addEventListener('click', onBoardClick); // etc
 
 goButton.addEventListener("click", buildInitialState)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

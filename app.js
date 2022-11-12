@@ -187,4 +187,74 @@ reset.addEventListener("click", resetFn)
 
 
 
+const space = document.querySelectorAll(".space");
+const statusText = document.querySelector("#statusText");
+const playAgain = document.querySelector("#playAgain");
+const winConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
 
+
+function changePlayer() {
+  currentPlayer = (currentPlayer == "X") ? "O" : "X";
+  statusText.textContent = `${currentPlayer}'s turn`;
+}
+
+if(roundWon){
+  statusText.textContent = `YAY! ${currentPlayer} WINS!`;
+  running = false;
+}
+else if(!options.includes("")){
+  statusText.textContent = `It's a tie! You both win!`;
+  running = false;
+}
+else{
+  changePlayer();
+}
+
+
+const space = document.querySelectorAll(".space");
+const statusText = document.querySelector("#statusText");
+const playAgain = document.querySelector("#playAgain");
+const winConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
+
+let options = ["", "", "", "", "", "", "", "", ""];
+let currentPlayer = "X";
+let running = true;
+
+initializeGame();
+
+function initializeGame(){
+    space.forEach(space => space.addEventListener("click", spaceClicked));
+    playAgain.addEventListener("click", playAgain);
+    statusText.textContent = `${currentPlayer}'s turn`;
+    running = true;
+}
+function spaceClicked(){
+    const spaceIndex = this.getAttribute("spaceIndex")
+
+  
+function updateSpace(space, index){
+      options[index] = currentPlayer;
+      space.textContent = currentPlayer;
+  }
+function changePlayer(){
+      currentPlayer = (currentPlayer == "X") ? "O" : "X";
+      statusText.textContent = `${currentPlayer}'s turn`;
+  
