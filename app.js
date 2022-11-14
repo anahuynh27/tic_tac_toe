@@ -6,255 +6,134 @@ const gameState = {
     [null, null, null]
   ]
 }
-    
-let playerX = gameState.players[0];
-    console.log(playerX)
-let playerO = gameState.players[1];
-console.log(playerO)
-    
 
-const table = document.getElementById("table"); //same as board?
-let td = table.querySelectorAll("td")
-console.log(td)
-
-
-function compPlay(event) {
-  function computerPlay() {
-    let random = Math.floor(Math.random() * td.length)
-    console.log(random)
-    let addText = td.textContent
-    addText = random
-  }
-  table.addEventListener("click", computerPlay)
-}
-
-//******* FUNCTIONS BELOW WORKED  ************/
-
-//***********PROMPTS NAME********* */
-turnCountsFirst = 5
-turnCountsSecond = 4
-totalMoves = 9
-function xState() {
-  function addXHere(event) {
-    let target = event.target; //either <td> or <table> depending where you click
-    console.log(target)
-    console.log("click");
-    turnCountsFirst--
-    turnCountsSecond--
-    totalMoves--
-    if (target.tagName == "TABLE") {
-      target = null 
-      console.log("this is null")
-    } else if (target.tagName == "TBODY") {
-      target = null
-      console.log("this is also null")
-    } else {
-      target.innerHTML = playerX
-    }
-  }
-  table.addEventListener('click', addXHere)
-}
-function oState() {
-  function addOHere(event) {
-    let target = event.target; //either <td> or <table> depending where you click
-    console.log(target)
-    console.log("click");
-    turnCountsFirst--
-    turnCountsSecond--
-    totalMoves--
-    if (target.tagName == "TABLE") {
-      target = null
-      console.log("this is null")
-    } else if (target.tagName == "TBODY") {
-      target = null
-      console.log("this is also null")
-    }else {
-      target.innerHTML = playerO
-    }
-    console.log(totalMoves)
-  }
-  table.addEventListener('click', addOHere)
-}
-
+//VAR
+const table = document.getElementById("table")
 let goButton = document.getElementById("go")
-let selectPlayerAmount = document.getElementById("playerSelect")
-let nameDisplay = document.getElementById("pVp")
-//we're going to have <p id="instruction"> change .innerText with player name
+let td = table.querySelectorAll("td")
+let reset = document.getElementById("reset")
+let tdArray = [...td]
 
-function goButtonFn() {
+
+let newArrayX = []
+let newArrayO = []
+let blankArray = []
+let gamerOne = gameState.players[0] //x
+let gamerTwo = gameState.players[1] //o
+let currentPlayer = gamerOne
+
+
+let random = Math.floor(Math.random()*td.length)
+let randomStart = 1
+
+let winningBoard = [
+  [0, 1, 2], //row
+[3, 4, 5], //row
+[6, 7, 8], 
+[0, 3, 6], //col
+[1, 4, 7], //col
+[2, 5, 8], //col
+[0, 4, 8], //diagonal
+[2, 4, 6] //diagonal
+]
+
+//[0 1 2]
+//[3 4 5]
+//[6 7 8]
+let tdCell = document.querySelectorAll(".cell")
+
+// tdCell.forEach((element, i) => {
+//   element.textContent = newArrayO
+// })
+// console.log(newArrayO)
+
+function checkWin(currentPlayer) {
+  // for (let i = 0; i < tdArray.length; i++){
+  //   if (td[i].innerHTML !== "") {
+  //     blankArray.push(td[i].innerHTML)
+  //   } else {
+  //     return null
+  //   }
+  // }
+
+  // console.log("X is",newArrayX)
+  // console.log("O is",newArrayO)
+  for (let i = 0; i < winningBoard.length; i++){
+    
+  }
+}
+
+function namePrompt() {
+  let selectPlayerAmount = document.getElementById("playerSelect")
+  let nameDisplay = document.getElementById("pVp")
   let oneOrTwo = selectPlayerAmount.value
-
-  if (oneOrTwo == "One Player") {
-    console.log("one")
-    let pNameOne = prompt("Player One - Enter Name Below", "Player One")
-    nameDisplay.innerText = `${pNameOne} vs. Computer`
-    let randomStart = Math.floor(Math.random() * gameState.players.length)
-    if (randomStart == 0) {
-      alert(`${pNameOne} will go first`)
-      xState()
-    } else {
-      alert("Computer will go first")
-      compPlay()
-    }
+    if (oneOrTwo == "One Player") {
+        console.log("one")
+        let pNameOne = prompt("Player One - Enter Name Below", "Player One")
+        nameDisplay.innerText = `${pNameOne} vs. Computer`
+        // let randomStart = Math.floor(Math.random() * gameState.players.length)
+      // let randomStart = 1
+      if (randomStart === 0) {
+        console.log(randomStart)
+        alert(`${pNameOne} will go first`)
+      } else if (randomStart === 1) {
+        console.log(randomStart)
+        alert("Computer will go first")
+        compFirst()
+      }
 //ignore below until you sort out above
     } else if (oneOrTwo == "Two Players") {
-    console.log("two")
-    let ppNameOne = prompt("Player One - Enter Name Below", "Player One")
-    let ppNameTwo = prompt("Player Two - Enter Name Below", "Player Two")
-    nameDisplay.innerText = `${ppNameOne} vs. ${ppNameTwo}`
-    let randomStart = Math.floor(Math.random() * gameState.players.length)
-    if (randomStart == 0) {
-        alert(`${ppNameOne} will go first`)
-    } else {
-        alert(`${ppNameTwo} will go first`)
+        console.log("two")
+        let ppNameOne = prompt("Player One - Enter Name Below", "Player One")
+        let ppNameTwo = prompt("Player Two - Enter Name Below", "Player Two")
+        nameDisplay.innerText = `${ppNameOne} vs. ${ppNameTwo}`
+        // let randomStart = Math.floor(Math.random() * gameState.players.length)
+      //let randomStart = 0
+            if (randomStart == 0) {
+              alert(`${ppNameOne} will go first`)
+            } else {
+              alert(`${ppNameTwo} will go first`)
+              table.addEventListener("click", swap)
       }
-  } else {
-    console.log("didn't work")
-    alert("Please select one or two players. Then click 'go'")
+    } else {
+        console.log("didn't work")
+        alert("Please select one or two players. Then click 'go'")
   }
 }
-goButton.addEventListener('click', goButtonFn)
-
-
-
-
-
-
-
-
-
-
-
-//*********PLACES X OR O IN TD******* */
-// function addXHere(event) {
-//   let target = event.target; //either <td> or <table> depending where you click
-//   console.log(target)
-//   console.log("click");
-  
-// if (target.tagName == "TABLE") {
-  // target = null
-  // console.log("this is null")
-  // } else if (target.tagName == "TBODY") {
-  // target = null
-  // console.log("this is also null")
-  // }else {
-  //   target.innerHTML = playerX
-//      }
-// }
-// table.addEventListener('click', addXHere)
-
-//*********MORE GAMES BUTTON**********
-let moreGames = document.getElementById("moreGames")
-function moreGamesFn() {
-  window.open("https://playtictactoe.org/")
+goButton.addEventListener("click", namePrompt)
+function compFirst() {
+  if (randomStart === 0) {
+    td[random].innerText = gamerTwo
+  } else if (randomStart === 1) {
+    td[random].innerText = gamerTwo
+  } 
+  table.addEventListener('click', addXHere)
 }
-moreGames.addEventListener("click", moreGamesFn)
+function addXHere(event) {
+  let target = event.target; //either <td> or <table> depending where you click
+  console.log(target)
+  console.log("click");
+  if (target.tagName == "TABLE") {
+    target = null
+    console.log("this is null")
+  } else if (target.tagName == "TBODY") {
+    target = null
+    console.log("this is also null")
+  }else {
+    target.innerHTML = gameState.players[0]
+  }
+  compFirst()
+}
 
-//*****************RESET BUTTON
-let reset = document.getElementById("reset");
-function resetFn() {
+function swap(event) {
+  if (event.target.className == "cell" && event.target.textContent === "") {
+    event.target.textContent = currentPlayer
+    currentPlayer = (currentPlayer === gamerOne) ? gamerTwo : gamerOne
+  }
+  checkWin(winningBoard, currentPlayer)
+}
+
+function resetBn() {
   location.reload()
 }
-reset.addEventListener("click", resetFn)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//MOUSEOVER && i did this on css td:hover
-// let td = table.querySelectorAll("td");
-
-// table.addEventListener('mouseover', (e) => {
-//   let target = e.target
-//   console.log(target)
-//   if (target.tagName == "TD") {
-//     console.log(e.target.tagName)
-//     for (let i = 0; i < td.length; i++) {
-//       td[i].style.backgroundColor = "pink"
-//     }
-//   }
-// })
-
-
-
-
-const space = document.querySelectorAll(".space");
-const statusText = document.querySelector("#statusText");
-const playAgain = document.querySelector("#playAgain");
-const winConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
-
-
-function changePlayer() {
-  currentPlayer = (currentPlayer == "X") ? "O" : "X";
-  statusText.textContent = `${currentPlayer}'s turn`;
-}
-
-if(roundWon){
-  statusText.textContent = `YAY! ${currentPlayer} WINS!`;
-  running = false;
-}
-else if(!options.includes("")){
-  statusText.textContent = `It's a tie! You both win!`;
-  running = false;
-}
-else{
-  changePlayer();
-}
-
-
-const space = document.querySelectorAll(".space");
-const statusText = document.querySelector("#statusText");
-const playAgain = document.querySelector("#playAgain");
-const winConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
-
-let options = ["", "", "", "", "", "", "", "", ""];
-let currentPlayer = "X";
-let running = true;
-
-initializeGame();
-
-function initializeGame(){
-    space.forEach(space => space.addEventListener("click", spaceClicked));
-    playAgain.addEventListener("click", playAgain);
-    statusText.textContent = `${currentPlayer}'s turn`;
-    running = true;
-}
-function spaceClicked(){
-    const spaceIndex = this.getAttribute("spaceIndex")
-
-  
-function updateSpace(space, index){
-      options[index] = currentPlayer;
-      space.textContent = currentPlayer;
-  }
-function changePlayer(){
-      currentPlayer = (currentPlayer == "X") ? "O" : "X";
-      statusText.textContent = `${currentPlayer}'s turn`;
-  
+reset.addEventListener("click", resetBn)
